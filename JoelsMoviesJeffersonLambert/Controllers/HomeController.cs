@@ -31,7 +31,7 @@ namespace JoelsMoviesJeffersonLambert.Controllers
         {
             ViewBag.IsEditMode = false;
             ViewBag.Categories = _categoryContext.Categories;
-            return View(); 
+            return View();
         }
 
         // some necessary evils
@@ -52,16 +52,17 @@ namespace JoelsMoviesJeffersonLambert.Controllers
                     } 
                 }
 
-                    // saving in the db
-                _context.Movies.Add(response);
-                _context.SaveChanges();
-                return View("Confirmation", response);
-            }
-            else
-            {
+           
                 ViewBag.IsEditMode = false;
                 ViewBag.Categories = _categoryContext.Categories;
                 return View("Form");
+            }
+            else
+            {
+                // saving in the db
+                _context.Movies.Add(response);
+                _context.SaveChanges();
+                return View("Confirmation", response);
             }
 
         }
