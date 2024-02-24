@@ -10,6 +10,10 @@ builder.Services.AddDbContext<MovieContext>(options =>
 {
 options.UseSqlite(builder.Configuration["ConnectionStrings:BlahConnection"]);
 });
+builder.Services.AddDbContext<CategoryContext>(options =>
+{
+    options.UseSqlite(builder.Configuration["ConnectionStrings:BlahConnection"]);
+});
 
 var app = builder.Build();
 

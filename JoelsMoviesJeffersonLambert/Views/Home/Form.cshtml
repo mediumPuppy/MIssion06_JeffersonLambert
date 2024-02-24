@@ -2,39 +2,42 @@
 @{
     ViewData["Title"] = "Form";
     ViewBag.Title = "Add New Movie";
+    String formAction = ViewBag.IsEditMode ? "UpdateMovie" : "CreateMovie";
     //@Debug.WriteLine(ViewBag.Ratings, "test")
   
 }
 
 <h2>@ViewBag.Title</h2>
 <!--The following is the form to collect movie information-->
-<form asp-action="CreateMovie">
-    <div asp-validation-summary="ModelOnly"></div>
-
+<form asp-action="@formAction">
+    
+    <input type="hidden" asp-for="MovieId" required />
     <div>
-        <label asp-for="Category">Category</label>
-        <input asp-for="Category" required />
+        <label  asp-for="CategoryId"></label>
+        <select class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, "CategoryId", "Category"))">
+            <option value="">-- Select a Category --</option>
+        </select>
     </div>
 
     <div>
-        <label asp-for="Title">Title</label>
-        <input asp-for="Title" required />
+        <label asp-for="Title" ></label>
+        <input class="form-control" asp-for="Title" required />
     </div>
 
     <div>
-        <label asp-for="Year">Year</label>
-        <input asp-for="Year" type="number" required />
+        <label asp-for="Year"></label>
+        <input class="form-control" asp-for="Year" type="number" min="1888" required />
     </div>
 
     <div>
-        <label asp-for="Director">Director</label>
-        <input asp-for="Director" required />
+        <label asp-for="Director"></label>
+        <input class ="form-control" asp-for="Director"  />
     </div>
 
     <div>
-        <label asp-for="Rating">Rating</label>
+        <label asp-for="Rating"></label>
 
-        <select asp-for="Rating" required>
+        <select class ="form-control" asp-for="Rating" >
             <option value="">Select a rating</option> <!-- Placeholder for no selection -->
             <option value="G">G</option>
             <option value="PG">PG</option>
@@ -44,22 +47,35 @@
     </div>
 
     <div>
-        <label asp-for="Edited">Edited</label>
-        <select asp-for="Edited">
-            <option value="true">Yes</option>
-            <option value="false">No</option>
+        <label asp-for="Edited"></label>
+        <select class="form-control" asp-for="Edited" required>
+            <option value="True">Yes</option>
+            <option value="False">No</option>
         </select>
     </div>
 
     <div>
-        <label asp-for="LentTo">Lent To</label>
-        <input asp-for="LentTo" />
+        <label asp-for="LentTo"></label>
+        <input class="form-control" asp-for="LentTo" />
     </div>
 
     <div>
-        <label asp-for="Notes">Notes</label>
-        <input asp-for="Notes" maxlength="25" />
+        <label asp-for="CopiedToPlex"></label>
+        <select class="form-control" asp-for="CopiedToPlex" required>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+
+        </select>
     </div>
 
-    <button type="submit">Submit</button>
+
+    <div>
+        <label asp-for="Notes"></label>
+        <input class="form-control" asp-for="Notes" maxlength="25" />
+    </div>
+
+    <br />
+    <button class="btn btn-dark" type="submit">Submit</button>
+    <div asp-validation-summary="All"></div>
 </form>
+

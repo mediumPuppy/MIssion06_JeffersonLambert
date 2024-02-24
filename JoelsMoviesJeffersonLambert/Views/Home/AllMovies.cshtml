@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<JoelsMoviesJeffersonLambert.Models.Movie>
+
+
+<h1>Here is list of all movies in the DB</h1>
+
+<table class="table table-bordered">
+    <thead class="fw-bold">
+        <tr>
+            <th>Movie ID</th>
+            <th>Category ID</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Director</th>
+            <th>Rating</th>
+            <th>Edited</th>
+            <th>Lent To</th>
+            <th>Copied To Plex</th>
+            <th>Notes</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <th>@x.MovieId</th>
+                <td>@x.CategoryId</td>
+                <td>@x.Title</td>
+                <td>@x.Year</td>
+                <td>@x.Director</td>
+                <td>@x.Rating</td>
+                <td>@x.Edited</td>
+                <td>@x.LentTo</td>
+                <td>@x.CopiedToPlex</td>
+                <td>@x.Notes</td>
+                <td><a asp-route-id="@x.MovieId" class="btn btn-info" asp-controller="Home" asp-action="Edit">Edit</a></td>
+                <td><a asp-route-id="@x.MovieId" class="btn btn-danger" asp-action="Delete" asp-route-id="@x.MovieId">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
